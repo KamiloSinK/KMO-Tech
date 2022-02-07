@@ -39,6 +39,14 @@
           </table>
           <br>
 
+          <button class="waves-effect waves-light btn green" @click="likebar++">Like</button>
+          <button class="waves-effect waves-light btn red" @click="likebar--">Dislike</button>
+          <br>
+          <label for="likes">Likes {{likebar}}</label>
+          <div class="progress" name="like">
+            <div class="determinate" :class="barColor" :style="{'width': likebar+'%'}"></div
+          ></div><br>
+
           <h4 class="red-text text-darken-4">
               {{subTitle}}
           </h4>
@@ -65,7 +73,7 @@
                         <span v-if="listProd.cant === 0"> - No hay Stock</span>
                         <span v-if="listProd.cant < 0"> - ERROR - Revisar Stock</span>
                     </td>
-                    <td><button class="waves-effect waves-light btn orange" @click="modProd(index)">Modificar</button></td>
+                    <td><button class="waves-effect waves-light btn red" @click="delProd(index)">Eliminar</button></td>
                   </tr>
                 </tbody>
               </table>
