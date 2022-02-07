@@ -4,9 +4,82 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>KMO Tech Store</title>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
 </head>
 <body>
-    <h1>Hola Mundo</h1>
+    <div id="app" class="container">
+        <h3 class="red-text text-darken-4">
+            {{mainTitle}}
+        </h3>
+        <table>
+            <thead>
+              <tr>
+                  <th>Nombre</th>
+                  <th>Cantidad</th>
+                  <th>Descripción</th>
+              </tr>
+            </thead>
+    
+            <tbody>
+              <tr>
+                <td><input type="text" v-model="newProd" @keyup.enter="addProd"></td>
+                <td><input type="number" v-model.number="newCant" @keyup.enter="addProd"></td>
+                <td><input type="text" v-model="newDesc" @keyup.enter="addProd"></td>
+              </tr>
+              <tr>
+                  <td></td>
+                  <td></td>
+                  <td><button class="waves-effect waves-light btn blue" @click="addProd">Agregar</button></td>
+              </tr>
+            </tbody>
+          </table>
+          <br>
+
+          <h4 class="red-text text-darken-4">
+              {{subTitle}}
+          </h4>
+          <button class="waves-effect waves-light btn green" @click="table = !table">Mostrar Lista</button>
+
+          <div v-show="table">
+            <table>
+                <thead>
+                  <tr>
+                      <th>Name</th>
+                      <th>Item Name</th>
+                      <th>Item Price</th>
+                  </tr>
+                </thead>
+        
+                <tbody>
+                  <tr v-for="(listProd, index) of allProd">
+                    <td>{{listProd.name}}</td>
+                    <td>{{listProd.cant}}</td>
+                    <td>{{listProd.desc}}</td>
+                    <td>
+                        <span v-if="listProd.cant >= 10"> - Suficiente Stock</span>
+                        <span v-if="listProd.cant >= 1 && listProd.cant < 10"> - Reponer Stock</span>
+                        <span v-if="listProd.cant === 0"> - No hay Stock</span>
+                        <span v-if="listProd.cant < 0"> - ERROR - Revisar Stock</span>
+                    </td>
+                    <td><button class="waves-effect waves-light btn orange" @click="modProd(index)">Modificar</button></td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+
+          <h3></h3>
+
+    </div>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- All logic JavaScript -->
+    <script src="app.js"></script>
 </body>
 </html>
